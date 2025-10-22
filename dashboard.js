@@ -106,7 +106,16 @@ function createProjectCard(project) {
                 ${project.location_ar}
             </div>
             <span class="project-status status-${project.status}">${statusText[project.status]}</span>
+            ${project.units && project.units.length > 0 ? `
+            <div style="margin: 10px 0; padding: 8px; background: var(--bg-light); border-radius: 8px; text-align: center; font-size: 0.9rem;">
+                <i class="fas fa-home"></i> ${project.units.length} وحدة
+            </div>
+            ` : ''}
             <div class="project-actions">
+                <button class="btn btn-success btn-small units-btn" data-id="${project.id}" style="flex: 1;">
+                    <i class="fas fa-home"></i>
+                    الوحدات
+                </button>
                 <button class="btn btn-primary btn-small edit-btn" data-id="${project.id}">
                     <i class="fas fa-edit"></i>
                     تعديل
@@ -120,10 +129,20 @@ function createProjectCard(project) {
     `;
     
     // Add event listeners
+    card.querySelector('.units-btn').addEventListener('click', () => manageUnits(project.id, project.title_ar));
     card.querySelector('.edit-btn').addEventListener('click', () => editProject(project.id));
     card.querySelector('.delete-btn').addEventListener('click', () => deleteProject(project.id));
     
     return card;
+}
+
+// Manage units for a project
+function manageUnits(projectId, projectTitle) {
+    // Store in sessionStorage for the units manager page
+    sessionStorage.setItem('currentProjectId', projectId);
+    sessionStorage.setItem('currentProjectTitle', projectTitle);
+    // Redirect to units manager
+    window.location.href = `units-manager.html?projectId=${projectId}`;
 }
 
 // Modal controls

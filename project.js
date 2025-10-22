@@ -146,6 +146,53 @@ function displayProject(project) {
             </div>
         </div>
 
+        <!-- Units -->
+        ${project.units && project.units.length > 0 ? `
+        <div class="project-units" style="margin-bottom: 60px;">
+            <h2 style="color: var(--primary-color); margin-bottom: 30px; font-size: 2rem; text-align: center;">
+                ${lang === 'ar' ? 'الوحدات المتاحة' : 'Available Units'}
+            </h2>
+            <div class="projects-grid" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));">
+                ${project.units.map(unit => `
+                    <div class="project-card" style="cursor: pointer;" onclick="window.location.href='unit.html?projectId=${project.id}&unitId=${unit.id}'">
+                        <div class="project-image-wrapper">
+                            <img src="${unit.mainImage || project.mainImage}" alt="${unit[`name_${lang}`] || unit.name_ar}" class="project-card-image">
+                            <span class="project-card-status status-${unit.status}">
+                                ${lang === 'ar' ? 
+                                    (unit.status === 'available' ? 'متاح' : unit.status === 'sold' ? 'مباع' : 'محجوز') :
+                                    (unit.status === 'available' ? 'Available' : unit.status === 'sold' ? 'Sold' : 'Reserved')
+                                }
+                            </span>
+                        </div>
+                        <div class="project-card-content">
+                            <h3 class="project-card-title" style="font-size: 1.3rem;">${unit[`name_${lang}`] || unit.name_ar}</h3>
+                            ${unit.price ? `
+                            <div style="color: var(--primary-color); font-weight: 700; font-size: 1.2rem; margin: 10px 0;">
+                                ${unit.price}
+                            </div>
+                            ` : ''}
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 15px 0; color: var(--text-light); font-size: 0.95rem;">
+                                ${unit.area ? `
+                                <span><i class="fas fa-ruler-combined"></i> ${unit.area} ${lang === 'ar' ? 'م²' : 'm²'}</span>
+                                ` : ''}
+                                ${unit.bedrooms ? `
+                                <span><i class="fas fa-bed"></i> ${unit.bedrooms}</span>
+                                ` : ''}
+                                ${unit.bathrooms ? `
+                                <span><i class="fas fa-bath"></i> ${unit.bathrooms}</span>
+                                ` : ''}
+                            </div>
+                            <div class="btn btn-primary btn-project-view" style="margin-top: auto; width: 100%; text-align: center;">
+                                <i class="fas fa-arrow-${lang === 'ar' ? 'left' : 'right'}"></i>
+                                ${lang === 'ar' ? 'عرض التفاصيل' : 'View Details'}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+
         <!-- Gallery -->
         ${project.images && project.images.length > 0 ? `
         <div class="project-gallery">

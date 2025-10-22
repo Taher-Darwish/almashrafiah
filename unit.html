@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الوحدة | شركة المشرفية</title>
+    <meta name="description" content="تفاصيل الوحدة العقارية">
+    
+    <link rel="icon" type="image/png" href="Images/logo.png">
+    <link rel="stylesheet" href="styles.css?v=2025-09-18-1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        .unit-detail {
+            padding: 100px 0 80px;
+            min-height: 100vh;
+        }
+        
+        .unit-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        
+        .unit-breadcrumb a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .unit-breadcrumb a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .unit-hero {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .unit-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .unit-hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px;
+            color: white;
+        }
+        
+        .unit-status {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .status-available {
+            background: var(--success-color);
+        }
+        
+        .status-sold {
+            background: #e74c3c;
+        }
+        
+        .status-reserved {
+            background: #f39c12;
+        }
+        
+        .unit-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .unit-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .unit-info-quick {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .quick-info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .quick-info-item i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .unit-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        @media (max-width: 968px) {
+            .unit-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .unit-description {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .unit-description h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .unit-description p {
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+        
+        .unit-specs {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .unit-specs h3 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            color: var(--text-light);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .spec-label i {
+            color: var(--secondary-color);
+            width: 20px;
+        }
+        
+        .spec-value {
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--bg-light);
+            border-radius: 10px;
+        }
+        
+        .feature-item i {
+            color: var(--success-color);
+            font-size: 1.2rem;
+        }
+        
+        .unit-gallery {
+            margin-bottom: 60px;
+        }
+        
+        .unit-gallery h2 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .gallery-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .floor-plans {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+        }
+        
+        .floor-plans h2 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .floor-plan-image {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+        }
+        
+        .contact-cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .contact-cta h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .loading-skeleton {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <img src="Images/logo.png" alt="شركة المشرفية" class="logo">
+                        <span class="company-name" data-i18n="brand.name">المشرفية</span>
+                    </a>
+                </div>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="index.html#home" class="nav-link" data-i18n="nav.home">الرئيسية</a>
+                    <a href="index.html#about" class="nav-link" data-i18n="nav.about">من نحن</a>
+                    <a href="index.html#our-projects" class="nav-link" data-i18n="nav.ourProjects">مشاريعنا</a>
+                    <a href="index.html#investment" class="nav-link" data-i18n="nav.investment">مسارات الاستثمار</a>
+                    <a href="index.html#construction" class="nav-link" data-i18n="nav.projects">التشييد والتشطيب</a>
+                    <a href="index.html#contact" class="nav-link" data-i18n="nav.contact">اتصل بنا</a>
+                    <button class="lang-toggle" id="lang-toggle">EN</button>
+                </div>
+                
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Unit Detail Section -->
+    <section class="unit-detail">
+        <div class="container">
+            <div id="unit-content">
+                <!-- Loading State -->
+                <div class="loading-skeleton" style="text-align: center; padding: 100px 0;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    <p style="margin-top: 20px; font-size: 1.2rem;">جاري تحميل تفاصيل الوحدة...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 شركة المشرفية للتطوير والاستثمار العقاري. جميع الحقوق محفوظة.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="unit.js"></script>
+</body>
+</html>
