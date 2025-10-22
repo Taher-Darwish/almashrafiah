@@ -1,0 +1,37 @@
+# VS Code
+.vscode/
+
+# Node modules (if any)
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# Firebase config (يمكن تضمينه أو استبعاده حسب الرغبة)
+# firebase-config.js
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build files (if any)
+dist/
+build/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Documentation (اختياري - يمكن حذف هذا السطر إذا أردت رفع الدليل)
+# PROJECTS-SYSTEM-GUIDE.md

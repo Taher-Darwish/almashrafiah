@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# خريطة الموقع
+Sitemap: https://almashrafiah.sa/sitemap.xml
+
+# منع الروبوتات من الوصول للملفات الإدارية
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# السماح بالوصول للصور والملفات المهمة
+Allow: /Images/
+Allow: /Partner logos/
+Allow: /*.css
+Allow: /*.js
