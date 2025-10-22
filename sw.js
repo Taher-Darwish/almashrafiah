@@ -1,8 +1,13 @@
 // Service Worker with update-friendly caching
-const CACHE_NAME = 'almashrafiah-v3-2025-09-18';
+const CACHE_NAME = 'almashrafiah-v4-2025-10-22';
 const ASSETS = [
     '/styles.css',
     '/script.js',
+    '/firebase-config.js',
+    '/dashboard.js',
+    '/units-manager.js',
+    '/project.js',
+    '/unit.js',
     '/Images/logo.png',
     'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
