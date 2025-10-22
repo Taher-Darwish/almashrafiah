@@ -59,7 +59,14 @@ async function loadProject() {
 // Display units
 function displayUnits() {
     const container = document.getElementById('unitsContainer');
-    const units = currentProject.units || [];
+    // Ensure units is always an array
+    let units = currentProject.units || [];
+    
+    // Convert to array if it's not already (in case it's an object)
+    if (!Array.isArray(units)) {
+        units = [];
+        currentProject.units = [];
+    }
     
     if (units.length === 0) {
         container.innerHTML = `
@@ -623,7 +630,13 @@ async function saveUnit() {
         }
         
         // Update project's units array
-        const units = currentProject.units || [];
+        // Ensure units is always an array
+        let units = currentProject.units || [];
+        
+        // Convert to array if it's not already
+        if (!Array.isArray(units)) {
+            units = [];
+        }
         
         if (currentUnitIndex !== null) {
             units[currentUnitIndex] = unitData;
@@ -661,7 +674,14 @@ async function deleteUnit(index) {
     }
     
     try {
-        const units = currentProject.units || [];
+        // Ensure units is always an array
+        let units = currentProject.units || [];
+        
+        // Convert to array if it's not already
+        if (!Array.isArray(units)) {
+            units = [];
+        }
+        
         units.splice(index, 1);
         
         await updateDoc(doc(db, 'projects', projectId), {
