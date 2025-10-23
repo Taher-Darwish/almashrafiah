@@ -339,6 +339,11 @@ document.getElementById('projectForm').addEventListener('submit', async (e) => {
             status: document.getElementById('status').value
         };
         
+        // Validate map URL if provided
+        if (formData.mapUrl && !formData.mapUrl.includes('google.com/maps/embed')) {
+            throw new Error('يجب استخدام رابط التضمين من Google Maps (يبدأ بـ https://www.google.com/maps/embed)');
+        }
+        
         // Upload main image if new one selected
         if (mainImageFile) {
             const mainImageRef = ref(storage, `projects/${Date.now()}_main_${mainImageFile.name}`);
