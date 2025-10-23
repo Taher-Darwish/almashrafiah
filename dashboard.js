@@ -119,14 +119,16 @@ function createProjectCard(project) {
             ` : ''}
             <div class="project-actions">
                 <button class="btn btn-success btn-small units-btn" data-id="${project.id}" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-                    <i class="fas fa-home" style="font-size: 1.1rem;"></i>
+                    <i class="fas fa-home" style="font-size: 1.3rem;"></i>
                     <span style="font-size: 0.85rem;">الوحدات</span>
                 </button>
-                <button class="btn btn-primary btn-small edit-btn" data-id="${project.id}">
-                    <i class="fas fa-edit"></i>
+                <button class="btn btn-primary btn-small edit-btn" data-id="${project.id}" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                    <i class="fas fa-edit" style="font-size: 1.3rem;"></i>
+                    <span style="font-size: 0.85rem;">تعديل</span>
                 </button>
-                <button class="btn btn-danger btn-small delete-btn" data-id="${project.id}">
-                    <i class="fas fa-trash"></i>
+                <button class="btn btn-danger btn-small delete-btn" data-id="${project.id}" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                    <i class="fas fa-trash" style="font-size: 1.3rem;"></i>
+                    <span style="font-size: 0.85rem;">حذف</span>
                 </button>
             </div>
         </div>
