@@ -165,10 +165,10 @@ function displayProject(project) {
                 </div>
                 ` : ''}
                 
-                ${project.units ? `
+                ${project.units && Array.isArray(project.units) && project.units.length > 0 ? `
                 <div class="spec-item">
                     <span class="spec-label">${t('spec.units')}</span>
-                    <span class="spec-value">${project.units}</span>
+                    <span class="spec-value">${project.units.length} ${lang === 'ar' ? 'وحدة' : 'units'}</span>
                 </div>
                 ` : ''}
                 
