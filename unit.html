@@ -264,10 +264,14 @@
             border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .floor-plan-wrapper:hover {
             transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .floor-plan-wrapper:hover .floor-plan-overlay {
@@ -278,6 +282,12 @@
             width: 100%;
             display: block;
             border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .floor-plan-wrapper {
+                max-width: 100%;
+            }
         }
 
         .floor-plan-overlay {
