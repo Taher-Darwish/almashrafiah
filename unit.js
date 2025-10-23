@@ -1,5 +1,6 @@
 // Unit Detail Page JavaScript
 import { db, getDoc, doc } from './firebase-config.js';
+import { lightbox } from './lightbox.js';
 
 // Get unit and project IDs from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -204,7 +205,13 @@ function displayUnit(unit, project) {
         <!-- Floor Plan -->
         <div class="floor-plans">
             <h2>${lang === 'ar' ? 'مخطط الطابق' : 'Floor Plan'}</h2>
-            <img src="${unit.floorPlan}" alt="Floor Plan" class="floor-plan-image">
+            <div class="floor-plan-wrapper" onclick="window.floorPlanLightbox()">
+                <img src="${unit.floorPlan}" alt="Floor Plan" class="floor-plan-image">
+                <div class="floor-plan-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <p>${lang === 'ar' ? 'اضغط للتكبير' : 'Click to enlarge'}</p>
+                </div>
+            </div>
         </div>
         ` : ''}
 
@@ -213,9 +220,12 @@ function displayUnit(unit, project) {
         <div class="unit-gallery">
             <h2>${lang === 'ar' ? 'معرض الصور' : 'Gallery'}</h2>
             <div class="gallery-images">
-                ${unit.images.map(img => `
-                    <div class="gallery-item">
+                ${unit.images.map((img, index) => `
+                    <div class="gallery-item" onclick="window.unitGalleryLightbox(${index})">
                         <img src="${img}" alt="${unitName}">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
                     </div>
                 `).join('')}
             </div>
@@ -235,9 +245,30 @@ function displayUnit(unit, project) {
                     <i class="fas fa-phone"></i>
                     ${lang === 'ar' ? 'اتصل بنا' : 'Contact Us'}
                 </a>
+                ${unit.pdfFile ? `
+                <a href="${unit.pdfFile}" target="_blank" class="btn btn-secondary" download>
+                    <i class="fas fa-file-pdf"></i>
+                    ${lang === 'ar' ? 'تحميل ملف الوحدة' : 'Download Unit PDF'}
+                </a>
+                ` : ''}
             </div>
         </div>
     `;
+
+    // Setup floor plan lightbox
+    if (unit.floorPlan) {
+        window.floorPlanLightbox = () => {
+            lightbox.open([unit.floorPlan], 0, [lang === 'ar' ? 'مخطط الطابق' : 'Floor Plan']);
+        };
+    }
+
+    // Setup gallery lightbox
+    if (unit.images && unit.images.length > 0) {
+        window.unitGalleryLightbox = (index) => {
+            const captions = unit.images.map(() => unitName);
+            lightbox.open(unit.images, index, captions);
+        };
+    }
 }
 
 function showError(message) {

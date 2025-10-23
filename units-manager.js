@@ -20,6 +20,7 @@ let currentUnitIndex = null;
 let unitMainImageFile = null;
 let unitGalleryFiles = [];
 let unitFloorPlanFile = null;
+let unitPdfFile = null;
 
 // Check authentication
 onAuthStateChanged(auth, (user) => {
@@ -254,6 +255,16 @@ function openUnitModal(unitIndex = null) {
                             <input type="file" id="unitGalleryImages" accept="image/*" multiple style="display: none;">
                         </div>
                         <div id="unitGalleryPreview" class="image-preview"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>ملف PDF للوحدة</label>
+                        <div class="image-upload-area" id="unitPdfUpload">
+                            <i class="fas fa-file-pdf"></i>
+                            <p>اضغط لرفع ملف PDF الخاص بالوحدة</p>
+                            <input type="file" id="unitPdfFile" accept="application/pdf" style="display: none;">
+                        </div>
+                        <div id="unitPdfPreview" class="image-preview"></div>
                     </div>
 
                     <div style="display: flex; gap: 15px; margin-top: 30px;">
@@ -504,6 +515,26 @@ function setupUnitModal(unitIndex) {
             reader.readAsDataURL(file);
         });
     });
+
+    // PDF upload handler
+    document.getElementById('unitPdfUpload').addEventListener('click', () => {
+        document.getElementById('unitPdfFile').click();
+    });
+
+    document.getElementById('unitPdfFile').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            unitPdfFile = file;
+            const preview = document.getElementById('unitPdfPreview');
+            preview.innerHTML = `
+                <div class="preview-item pdf-preview">
+                    <i class="fas fa-file-pdf" style="font-size: 3rem; color: #e74c3c;"></i>
+                    <p style="margin-top: 10px; font-weight: 600;">${file.name}</p>
+                    <p style="font-size: 0.9rem; color: var(--text-light);">${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                </div>
+            `;
+        }
+    });
     
     // Fill form if editing
     if (unitIndex !== null) {
@@ -550,6 +581,16 @@ function setupUnitModal(unitIndex) {
                 </div>
             `).join('');
         }
+
+        if (unit.pdfFile) {
+            document.getElementById('unitPdfPreview').innerHTML = `
+                <div class="preview-item pdf-preview">
+                    <i class="fas fa-file-pdf" style="font-size: 3rem; color: #e74c3c;"></i>
+                    <p style="margin-top: 10px; font-weight: 600;">PDF موجود</p>
+                    <a href="${unit.pdfFile}" target="_blank" style="color: var(--primary-color);">عرض الملف</a>
+                </div>
+            `;
+        }
     }
     
     // Form submit
@@ -566,6 +607,7 @@ function closeUnitModal() {
     unitMainImageFile = null;
     unitGalleryFiles = [];
     unitFloorPlanFile = null;
+    unitPdfFile = null;
 }
 
 // Save unit
@@ -627,6 +669,15 @@ async function saveUnit() {
             unitData.images = currentProject.units[currentUnitIndex].images;
         } else {
             unitData.images = [];
+        }
+
+        // Upload PDF
+        if (unitPdfFile) {
+            const pdfRef = ref(storage, `projects/${projectId}/units/${Date.now()}_${unitPdfFile.name}`);
+            await uploadBytes(pdfRef, unitPdfFile);
+            unitData.pdfFile = await getDownloadURL(pdfRef);
+        } else if (currentUnitIndex !== null && currentProject.units[currentUnitIndex].pdfFile) {
+            unitData.pdfFile = currentProject.units[currentUnitIndex].pdfFile;
         }
         
         // Update project's units array

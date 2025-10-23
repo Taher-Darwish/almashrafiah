@@ -1,5 +1,6 @@
 // Project Detail Page JavaScript
 import { db, getDocs, getDoc, doc, collection } from './firebase-config.js';
+import { lightbox } from './lightbox.js';
 
 // Get project ID from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -17,6 +18,7 @@ const translations = {
         'project.contact': 'هل أنت مهتم بهذا المشروع؟',
         'project.contactText': 'تواصل معنا الآن للحصول على المزيد من التفاصيل',
         'project.contactBtn': 'تواصل معنا',
+        'project.downloadPDF': 'تحميل ملف المشروع',
         'status.available': 'متاح',
         'status.sold': 'مباع',
         'status.upcoming': 'قريباً',
@@ -37,6 +39,7 @@ const translations = {
         'project.contact': 'Interested in this project?',
         'project.contactText': 'Contact us now for more details',
         'project.contactBtn': 'Contact Us',
+        'project.downloadPDF': 'Download Project PDF',
         'status.available': 'Available',
         'status.sold': 'Sold',
         'status.upcoming': 'Upcoming',
@@ -198,9 +201,12 @@ function displayProject(project) {
         <div class="project-gallery">
             <h2>${t('project.gallery')}</h2>
             <div class="gallery-images">
-                ${project.images.map(img => `
-                    <div class="gallery-item">
+                ${project.images.map((img, index) => `
+                    <div class="gallery-item" onclick="window.projectLightbox(${index})">
                         <img src="${img}" alt="${title}">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
                     </div>
                 `).join('')}
             </div>
@@ -211,12 +217,28 @@ function displayProject(project) {
         <div class="contact-cta">
             <h2>${t('project.contact')}</h2>
             <p>${t('project.contactText')}</p>
-            <a href="index.html#contact" class="btn btn-primary">
-                <i class="fas fa-phone"></i>
-                ${t('project.contactBtn')}
-            </a>
+            <div class="cta-buttons">
+                <a href="index.html#contact" class="btn btn-primary">
+                    <i class="fas fa-phone"></i>
+                    ${t('project.contactBtn')}
+                </a>
+                ${project.pdfFile ? `
+                <a href="${project.pdfFile}" target="_blank" class="btn btn-secondary" download>
+                    <i class="fas fa-file-pdf"></i>
+                    ${t('project.downloadPDF')}
+                </a>
+                ` : ''}
+            </div>
         </div>
     `;
+
+    // Setup lightbox for gallery
+    if (project.images && project.images.length > 0) {
+        window.projectLightbox = (index) => {
+            const captions = project.images.map(() => title);
+            lightbox.open(project.images, index, captions);
+        };
+    }
 }
 
 function showError(messageKey) {

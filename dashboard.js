@@ -24,8 +24,10 @@ import {
 let currentProjectId = null;
 let mainImageFile = null;
 let galleryFiles = [];
+let pdfFile = null;
 let existingMainImage = null;
 let existingGalleryImages = [];
+let existingPdfFile = null;
 
 // Check authentication
 onAuthStateChanged(auth, (user) => {
@@ -180,6 +182,7 @@ function openModal(projectData = null) {
         
         existingMainImage = projectData.mainImage;
         existingGalleryImages = projectData.images || [];
+        existingPdfFile = projectData.pdfFile || null;
         
         // Show existing images
         if (existingMainImage) {
@@ -197,16 +200,30 @@ function openModal(projectData = null) {
                 </div>
             `).join('');
         }
+
+        if (existingPdfFile) {
+            const fileName = existingPdfFile.split('/').pop().split('?')[0];
+            document.getElementById('pdfPreview').innerHTML = `
+                <div class="preview-item pdf-preview">
+                    <i class="fas fa-file-pdf" style="font-size: 3rem; color: #e74c3c;"></i>
+                    <p style="margin-top: 10px; font-weight: 600;">PDF موجود</p>
+                    <a href="${existingPdfFile}" target="_blank" style="color: var(--primary-color);">عرض الملف</a>
+                </div>
+            `;
+        }
     } else {
         document.getElementById('projectForm').reset();
         document.getElementById('mainImagePreview').innerHTML = '';
         document.getElementById('galleryPreview').innerHTML = '';
+        document.getElementById('pdfPreview').innerHTML = '';
         existingMainImage = null;
         existingGalleryImages = [];
+        existingPdfFile = null;
     }
     
     mainImageFile = null;
     galleryFiles = [];
+    pdfFile = null;
     modal.classList.add('active');
 }
 
@@ -215,8 +232,10 @@ function closeModal() {
     currentProjectId = null;
     mainImageFile = null;
     galleryFiles = [];
+    pdfFile = null;
     existingMainImage = null;
     existingGalleryImages = [];
+    existingPdfFile = null;
 }
 
 // Image upload handlers
@@ -273,6 +292,26 @@ document.getElementById('galleryImages').addEventListener('change', (e) => {
     });
 });
 
+// PDF upload handler
+document.getElementById('pdfUpload').addEventListener('click', () => {
+    document.getElementById('pdfFile').click();
+});
+
+document.getElementById('pdfFile').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        pdfFile = file;
+        const preview = document.getElementById('pdfPreview');
+        preview.innerHTML = `
+            <div class="preview-item pdf-preview">
+                <i class="fas fa-file-pdf" style="font-size: 3rem; color: #e74c3c;"></i>
+                <p style="margin-top: 10px; font-weight: 600;">${file.name}</p>
+                <p style="font-size: 0.9rem; color: var(--text-light);">${(file.size / 1024 / 1024).toFixed(2)} MB</p>
+            </div>
+        `;
+    }
+});
+
 // Form submission
 document.getElementById('projectForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -323,6 +362,15 @@ document.getElementById('projectForm').addEventListener('submit', async (e) => {
             formData.images = existingGalleryImages;
         } else {
             formData.images = [];
+        }
+
+        // Upload PDF if new one selected
+        if (pdfFile) {
+            const pdfRef = ref(storage, `projects/${Date.now()}_${pdfFile.name}`);
+            await uploadBytes(pdfRef, pdfFile);
+            formData.pdfFile = await getDownloadURL(pdfRef);
+        } else if (existingPdfFile) {
+            formData.pdfFile = existingPdfFile;
         }
         
         // Save to Firestore
