@@ -118,9 +118,9 @@ function createProjectCard(project) {
             </div>
             ` : ''}
             <div class="project-actions">
-                <button class="btn btn-success btn-small units-btn" data-id="${project.id}">
-                    <i class="fas fa-home"></i>
-                    <span>الوحدات</span>
+                <button class="btn btn-success btn-small units-btn" data-id="${project.id}" style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+                    <i class="fas fa-home" style="font-size: 1.1rem;"></i>
+                    <span style="font-size: 0.85rem;">الوحدات</span>
                 </button>
                 <button class="btn btn-primary btn-small edit-btn" data-id="${project.id}">
                     <i class="fas fa-edit"></i>
