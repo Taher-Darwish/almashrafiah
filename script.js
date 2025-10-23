@@ -468,7 +468,7 @@ function initializeI18n() {
             hero: {
                 title: 'المشرفية\nللتطوير والاستثمار العقاري',
                 subtitle: 'نحن شركة سعودية تأسست برؤية طموحة لصناعة نماذج استثمارية مبتكرة\nمن خلال تطوير وحدات سكنية ذات جودة عالية في مواقع استراتيجية',
-                ctaPrimary: 'ابدأ الاستثمار',
+                ctaPrimary: 'تواصل معنا',
                 ctaSecondary: 'اعرف المزيد',
                 quality: 'مشاريع عالية الجودة',
                 stats: {
@@ -577,7 +577,7 @@ function initializeI18n() {
             hero: {
                 title: 'Al-Mashrafiah\nReal Estate Development & Investment',
                 subtitle: 'We are a Saudi company with an ambitious vision to craft innovative investment models\nby developing high-quality residential units in strategic locations',
-                ctaPrimary: 'Start Investing',
+                ctaPrimary: 'Contact Us',
                 ctaSecondary: 'Learn More',
                 quality: 'High-quality projects',
                 stats: {
