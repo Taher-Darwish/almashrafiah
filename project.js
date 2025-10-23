@@ -89,6 +89,16 @@ function displayProject(project) {
     const location = project[`location_${lang}`] || project.location_ar;
     
     content.innerHTML = `
+        <!-- PDF Download Button -->
+        ${project.pdfFile ? `
+        <div style="margin-bottom: 30px; text-align: center;">
+            <a href="${project.pdfFile}" target="_blank" class="btn btn-primary" download style="display: inline-flex; align-items: center; gap: 10px; font-size: 1.1rem; padding: 12px 30px;">
+                <i class="fas fa-file-pdf"></i>
+                ${t('project.downloadPDF')}
+            </a>
+        </div>
+        ` : ''}
+
         <!-- Project Hero -->
         <div class="project-hero">
             <img src="${project.mainImage}" alt="${title}">
@@ -217,18 +227,10 @@ function displayProject(project) {
         <div class="contact-cta">
             <h2>${t('project.contact')}</h2>
             <p>${t('project.contactText')}</p>
-            <div class="cta-buttons">
-                <a href="index.html#contact" class="btn btn-primary">
-                    <i class="fas fa-phone"></i>
-                    ${t('project.contactBtn')}
-                </a>
-                ${project.pdfFile ? `
-                <a href="${project.pdfFile}" target="_blank" class="btn btn-secondary" download>
-                    <i class="fas fa-file-pdf"></i>
-                    ${t('project.downloadPDF')}
-                </a>
-                ` : ''}
-            </div>
+            <a href="index.html#contact" class="btn btn-primary">
+                <i class="fas fa-phone"></i>
+                ${t('project.contactBtn')}
+            </a>
         </div>
     `;
 
