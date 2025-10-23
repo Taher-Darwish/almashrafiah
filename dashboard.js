@@ -101,6 +101,7 @@ function createProjectCard(project) {
     };
     
     card.innerHTML = `
+        <span class="project-status status-${project.status}">${statusText[project.status]}</span>
         <img src="${project.mainImage}" alt="${project.title_ar}" class="project-image">
         <div class="project-content">
             <h3 class="project-title">${project.title_ar}</h3>
@@ -108,14 +109,16 @@ function createProjectCard(project) {
                 <i class="fas fa-map-marker-alt"></i>
                 ${project.location_ar}
             </div>
-            <span class="project-status status-${project.status}">${statusText[project.status]}</span>
             ${project.units && project.units.length > 0 ? `
-            <div style="margin: 10px 0; padding: 8px; background: var(--bg-light); border-radius: 8px; text-align: center; font-size: 0.9rem;">
-                <i class="fas fa-home"></i> ${project.units.length} وحدة
+            <div class="project-meta">
+                <div class="meta-item">
+                    <i class="fas fa-home"></i>
+                    <span>${project.units.length} وحدة</span>
+                </div>
             </div>
             ` : ''}
             <div class="project-actions">
-                <button class="btn btn-success btn-small units-btn" data-id="${project.id}" style="flex: 1;">
+                <button class="btn btn-success btn-small units-btn" data-id="${project.id}">
                     <i class="fas fa-home"></i>
                     الوحدات
                 </button>
