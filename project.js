@@ -147,14 +147,6 @@ function displayProject(project) {
                 <p>${description}</p>
             </div>
 
-            ${warranty ? `
-            <!-- Warranty -->
-            <div class="project-description" style="background: #f8f9fa; border-left: 4px solid var(--primary-color);">
-                <h2>${lang === 'ar' ? 'ضمانات المشروع' : 'Project Warranties'}</h2>
-                <p style="white-space: pre-line;">${warranty}</p>
-            </div>
-            ` : ''}
-
             <!-- Specifications -->
             <div class="project-specs">
                 <h3>${t('project.specs')}</h3>
@@ -255,6 +247,21 @@ function displayProject(project) {
                                 ${lang === 'ar' ? 'عرض التفاصيل' : 'View Details'}
                             </div>
                         </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        ` : ''}
+
+        <!-- Warranties -->
+        ${warranty ? `
+        <div class="project-gallery" style="margin-bottom: 60px;">
+            <h2>${lang === 'ar' ? 'ضمانات المشروع' : 'Project Warranties'}</h2>
+            <div class="features-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                ${warranty.split('\n').filter(line => line.trim()).map(line => `
+                    <div class="feature-item" style="display: flex; align-items: start; gap: 15px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                        <i class="fas fa-shield-alt" style="color: var(--primary-color); font-size: 1.2rem; margin-top: 3px;"></i>
+                        <span style="flex: 1; line-height: 1.6;">${line.trim()}</span>
                     </div>
                 `).join('')}
             </div>

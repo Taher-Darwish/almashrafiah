@@ -149,14 +149,6 @@ function displayUnit(unit, project) {
                 <p>${description}</p>
             </div>
 
-            ${warranty ? `
-            <!-- Warranty -->
-            <div class="unit-description" style="background: #f8f9fa; border-left: 4px solid var(--primary-color);">
-                <h2>${lang === 'ar' ? 'ضمانات الوحدة' : 'Unit Warranties'}</h2>
-                <p style="white-space: pre-line;">${warranty}</p>
-            </div>
-            ` : ''}
-
             ${unit.features && unit.features.length > 0 ? `
             <div class="unit-description">
                 <h2>${lang === 'ar' ? 'المميزات' : 'Features'}</h2>
@@ -165,6 +157,20 @@ function displayUnit(unit, project) {
                         <div class="feature-item">
                             <i class="fas fa-check-circle"></i>
                             <span>${feature}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            ` : ''}
+
+            ${warranty ? `
+            <div class="unit-description">
+                <h2>${lang === 'ar' ? 'ضمانات الوحدة' : 'Unit Warranties'}</h2>
+                <div class="features-list">
+                    ${warranty.split('\n').filter(line => line.trim()).map(line => `
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt" style="color: var(--primary-color);"></i>
+                            <span>${line.trim()}</span>
                         </div>
                     `).join('')}
                 </div>
