@@ -101,34 +101,34 @@ function createProjectCard(project) {
     };
     
     card.innerHTML = `
-        <span class="project-status status-${project.status}">${statusText[project.status]}</span>
-        <img src="${project.mainImage}" alt="${project.title_ar}" class="project-image">
+        <div style="position: relative;">
+            <img src="${project.mainImage}" alt="${project.title_ar}" class="project-image">
+            <span class="project-status status-${project.status}" style="position: absolute; top: 15px; right: 15px; z-index: 1;">${statusText[project.status]}</span>
+        </div>
         <div class="project-content">
             <h3 class="project-title">${project.title_ar}</h3>
             <div class="project-location">
                 <i class="fas fa-map-marker-alt"></i>
-                ${project.location_ar}
+                <span>${project.location_ar}</span>
             </div>
             ${project.units && project.units.length > 0 ? `
-            <div class="project-meta">
-                <div class="meta-item">
-                    <i class="fas fa-home"></i>
-                    <span>${project.units.length} وحدة</span>
-                </div>
+            <div style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; font-size: 0.9rem; font-weight: 600; color: var(--primary-color); margin-bottom: 10px; border: 2px solid var(--primary-color); box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                <i class="fas fa-home"></i>
+                <span>${project.units.length} وحدة متاحة</span>
             </div>
             ` : ''}
             <div class="project-actions">
                 <button class="btn btn-success btn-small units-btn" data-id="${project.id}">
                     <i class="fas fa-home"></i>
-                    الوحدات
+                    <span>الوحدات</span>
                 </button>
                 <button class="btn btn-primary btn-small edit-btn" data-id="${project.id}">
                     <i class="fas fa-edit"></i>
-                    تعديل
+                    <span style="display: none;">تعديل</span>
                 </button>
                 <button class="btn btn-danger btn-small delete-btn" data-id="${project.id}">
                     <i class="fas fa-trash"></i>
-                    حذف
+                    <span style="display: none;">حذف</span>
                 </button>
             </div>
         </div>
