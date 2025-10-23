@@ -28,7 +28,7 @@ export async function loadProjects() {
     const container = document.getElementById('projects-grid');
     if (!container) return;
     
-    const currentLang = localStorage.getItem('preferredLanguage') || 'ar';
+    const currentLang = localStorage.getItem('lang') || 'ar';
     const t = (key) => translations[currentLang][key] || key;
     
     try {

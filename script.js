@@ -1356,7 +1356,7 @@ async function loadProjectsFromFirebase() {
         // Dynamically import Firebase modules
         const { db, getDocs, collection, query, orderBy } = await import('./firebase-config.js');
         
-        const currentLang = localStorage.getItem('preferredLanguage') || 'ar';
+        const currentLang = localStorage.getItem('lang') || 'ar';
         
         const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
         const querySnapshot = await getDocs(q);

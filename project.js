@@ -66,7 +66,7 @@ const translations = {
     }
 };
 
-let currentLang = localStorage.getItem('preferredLanguage') || 'ar';
+let currentLang = localStorage.getItem('lang') || 'ar';
 
 // Translation helper
 function t(key) {
@@ -322,7 +322,7 @@ function showError(messageKey) {
 // Language toggle
 document.getElementById('lang-toggle')?.addEventListener('click', () => {
     currentLang = currentLang === 'ar' ? 'en' : 'ar';
-    localStorage.setItem('preferredLanguage', currentLang);
+    localStorage.setItem('lang', currentLang);
     
     document.documentElement.lang = currentLang;
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
