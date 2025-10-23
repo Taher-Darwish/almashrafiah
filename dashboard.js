@@ -124,11 +124,9 @@ function createProjectCard(project) {
                 </button>
                 <button class="btn btn-primary btn-small edit-btn" data-id="${project.id}">
                     <i class="fas fa-edit"></i>
-                    <span style="display: none;">تعديل</span>
                 </button>
                 <button class="btn btn-danger btn-small delete-btn" data-id="${project.id}">
                     <i class="fas fa-trash"></i>
-                    <span style="display: none;">حذف</span>
                 </button>
             </div>
         </div>
