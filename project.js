@@ -9,6 +9,13 @@ const projectId = urlParams.get('id');
 // i18n translations
 const translations = {
     ar: {
+        'brand.name': 'المشرفية',
+        'nav.home': 'الرئيسية',
+        'nav.about': 'من نحن',
+        'nav.ourProjects': 'مشاريعنا',
+        'nav.investment': 'مسارات الاستثمار',
+        'nav.projects': 'التشييد والتشطيب',
+        'nav.contact': 'اتصل بنا',
         'project.back': 'العودة إلى المشاريع',
         'project.loading': 'جاري تحميل تفاصيل المشروع...',
         'project.notFound': 'المشروع غير موجود',
@@ -30,6 +37,13 @@ const translations = {
         'spec.status': 'الحالة'
     },
     en: {
+        'brand.name': 'Al-Mashrafiah',
+        'nav.home': 'Home',
+        'nav.about': 'About Us',
+        'nav.ourProjects': 'Our Projects',
+        'nav.investment': 'Investment Paths',
+        'nav.projects': 'Construction & Finishing',
+        'nav.contact': 'Contact Us',
         'project.back': 'Back to Projects',
         'project.loading': 'Loading project details...',
         'project.notFound': 'Project not found',
@@ -53,6 +67,22 @@ const translations = {
 };
 
 let currentLang = localStorage.getItem('preferredLanguage') || 'ar';
+
+// Translation helper
+function t(key) {
+    return translations[currentLang][key] || key;
+}
+
+// Update page translations
+function updatePageTranslations() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translation = t(key);
+        if (translation) {
+            el.textContent = translation;
+        }
+    });
+}
 
 // Load and display project
 async function loadProject() {
@@ -282,6 +312,7 @@ document.getElementById('lang-toggle')?.addEventListener('click', () => {
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     document.getElementById('lang-toggle').textContent = currentLang === 'ar' ? 'EN' : 'ع';
     
+    updatePageTranslations();
     loadProject();
 });
 
@@ -297,5 +328,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
     document.getElementById('lang-toggle').textContent = currentLang === 'ar' ? 'EN' : 'ع';
     
+    updatePageTranslations();
     loadProject();
 });
