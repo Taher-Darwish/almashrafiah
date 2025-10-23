@@ -67,16 +67,6 @@ function displayUnit(unit, project) {
             <span>${unitName}</span>
         </div>
 
-        <!-- PDF Download Button -->
-        ${unit.pdfFile ? `
-        <div style="margin: 20px 0 30px; text-align: center;">
-            <a href="${unit.pdfFile}" target="_blank" class="btn btn-primary" download style="display: inline-flex; align-items: center; gap: 10px; font-size: 1.1rem; padding: 12px 30px;">
-                <i class="fas fa-file-pdf"></i>
-                ${lang === 'ar' ? 'تحميل ملف الوحدة' : 'Download Unit PDF'}
-            </a>
-        </div>
-        ` : ''}
-
         <!-- Unit Hero -->
         <div class="unit-hero">
             <img src="${unit.mainImage || project.mainImage}" alt="${unitName}">
@@ -105,6 +95,12 @@ function displayUnit(unit, project) {
                     ` : ''}
                 </div>
             </div>
+            ${unit.pdfFile ? `
+            <a href="${unit.pdfFile}" target="_blank" class="pdf-download-overlay" download>
+                <i class="fas fa-file-pdf"></i>
+                <span>${lang === 'ar' ? 'تحميل ملف الوحدة' : 'Download Unit PDF'}</span>
+            </a>
+            ` : ''}
         </div>
 
         <!-- Unit Content -->

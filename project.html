@@ -55,6 +55,44 @@
             padding: 40px;
             color: white;
         }
+
+        .pdf-download-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .pdf-download-overlay:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .pdf-download-overlay i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .pdf-download-overlay {
+                bottom: 20px;
+                left: 20px;
+                padding: 10px 16px;
+                font-size: 0.85rem;
+            }
+        }
         
         .project-status {
             display: inline-block;
