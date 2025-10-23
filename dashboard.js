@@ -28,6 +28,7 @@ let pdfFile = null;
 let existingMainImage = null;
 let existingGalleryImages = [];
 let existingPdfFile = null;
+let existingUnits = [];
 
 // Check authentication
 onAuthStateChanged(auth, (user) => {
@@ -186,6 +187,7 @@ function openModal(projectData = null) {
         existingMainImage = projectData.mainImage;
         existingGalleryImages = projectData.images || [];
         existingPdfFile = projectData.pdfFile || null;
+        existingUnits = projectData.units || [];
         
         // Show existing images
         if (existingMainImage) {
@@ -239,6 +241,7 @@ function closeModal() {
     existingMainImage = null;
     existingGalleryImages = [];
     existingPdfFile = null;
+    existingUnits = [];
 }
 
 // Image upload handlers
@@ -382,6 +385,11 @@ document.getElementById('projectForm').addEventListener('submit', async (e) => {
             formData.pdfFile = await getDownloadURL(pdfRef);
         } else if (existingPdfFile) {
             formData.pdfFile = existingPdfFile;
+        }
+
+        // Preserve existing units when updating
+        if (currentProjectId && existingUnits.length > 0) {
+            formData.units = existingUnits;
         }
         
         // Save to Firestore
