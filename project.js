@@ -155,6 +155,26 @@ function displayProject(project) {
             </div>
         </div>
 
+        <!-- Map -->
+        ${project.mapUrl ? `
+        <div class="project-map" style="margin-bottom: 60px;">
+            <h2 style="color: var(--primary-color); margin-bottom: 30px; font-size: 2rem; text-align: center;">
+                ${lang === 'ar' ? 'موقع المشروع' : 'Project Location'}
+            </h2>
+            <div style="width: 100%; height: 450px; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                <iframe 
+                    src="${project.mapUrl}" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+        ` : ''}
+
         <!-- Units -->
         ${project.units && project.units.length > 0 ? `
         <div class="project-units" style="margin-bottom: 60px;">

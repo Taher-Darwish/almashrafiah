@@ -172,6 +172,7 @@ function openModal(projectData = null) {
         document.getElementById('title_en').value = projectData.title_en || '';
         document.getElementById('location_ar').value = projectData.location_ar || '';
         document.getElementById('location_en').value = projectData.location_en || '';
+        document.getElementById('mapUrl').value = projectData.mapUrl || '';
         document.getElementById('description_ar').value = projectData.description_ar || '';
         document.getElementById('description_en').value = projectData.description_en || '';
         document.getElementById('area').value = projectData.area || '';
@@ -328,6 +329,7 @@ document.getElementById('projectForm').addEventListener('submit', async (e) => {
             title_en: document.getElementById('title_en').value.trim(),
             location_ar: document.getElementById('location_ar').value.trim(),
             location_en: document.getElementById('location_en').value.trim(),
+            mapUrl: document.getElementById('mapUrl').value.trim(),
             description_ar: document.getElementById('description_ar').value.trim(),
             description_en: document.getElementById('description_en').value.trim(),
             area: document.getElementById('area').value.trim(),
