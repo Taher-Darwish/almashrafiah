@@ -117,6 +117,7 @@ function displayProject(project) {
     const title = project[`title_${lang}`] || project.title_ar;
     const description = project[`description_${lang}`] || project.description_ar;
     const location = project[`location_${lang}`] || project.location_ar;
+    const warranty = project[`warranty_${lang}`] || project.warranty_ar;
     
     content.innerHTML = `
         <!-- Project Hero -->
@@ -145,6 +146,14 @@ function displayProject(project) {
                 <h2>${t('project.description')}</h2>
                 <p>${description}</p>
             </div>
+
+            ${warranty ? `
+            <!-- Warranty -->
+            <div class="project-description" style="background: #f8f9fa; border-left: 4px solid var(--primary-color);">
+                <h2>${lang === 'ar' ? 'ضمانات المشروع' : 'Project Warranties'}</h2>
+                <p style="white-space: pre-line;">${warranty}</p>
+            </div>
+            ` : ''}
 
             <!-- Specifications -->
             <div class="project-specs">

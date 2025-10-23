@@ -180,6 +180,8 @@ function openModal(projectData = null) {
         document.getElementById('units').value = projectData.units || '';
         document.getElementById('deliveryDate').value = projectData.deliveryDate || '';
         document.getElementById('status').value = projectData.status || 'available';
+        document.getElementById('warranty_ar').value = projectData.warranty_ar || '';
+        document.getElementById('warranty_en').value = projectData.warranty_en || '';
         
         existingMainImage = projectData.mainImage;
         existingGalleryImages = projectData.images || [];
@@ -336,7 +338,9 @@ document.getElementById('projectForm').addEventListener('submit', async (e) => {
             price: document.getElementById('price').value.trim(),
             units: document.getElementById('units').value.trim(),
             deliveryDate: document.getElementById('deliveryDate').value.trim(),
-            status: document.getElementById('status').value
+            status: document.getElementById('status').value,
+            warranty_ar: document.getElementById('warranty_ar').value.trim(),
+            warranty_en: document.getElementById('warranty_en').value.trim()
         };
         
         // Validate map URL if provided

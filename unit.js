@@ -86,6 +86,7 @@ function displayUnit(unit, project) {
     const unitName = unit[`name_${lang}`] || unit.name_ar;
     const description = unit[`description_${lang}`] || unit.description_ar;
     const projectTitle = project[`title_${lang}`] || project.title_ar;
+    const warranty = unit[`warranty_${lang}`] || unit.warranty_ar;
     
     const statusText = {
         ar: { available: 'متاح', sold: 'مباع', reserved: 'محجوز' },
@@ -146,9 +147,19 @@ function displayUnit(unit, project) {
             <div class="unit-description">
                 <h2>${lang === 'ar' ? 'وصف الوحدة' : 'Unit Description'}</h2>
                 <p>${description}</p>
-                
-                ${unit.features && unit.features.length > 0 ? `
-                <h2 style="margin-top: 30px;">${lang === 'ar' ? 'المميزات' : 'Features'}</h2>
+            </div>
+
+            ${warranty ? `
+            <!-- Warranty -->
+            <div class="unit-description" style="background: #f8f9fa; border-left: 4px solid var(--primary-color);">
+                <h2>${lang === 'ar' ? 'ضمانات الوحدة' : 'Unit Warranties'}</h2>
+                <p style="white-space: pre-line;">${warranty}</p>
+            </div>
+            ` : ''}
+
+            ${unit.features && unit.features.length > 0 ? `
+            <div class="unit-description">
+                <h2>${lang === 'ar' ? 'المميزات' : 'Features'}</h2>
                 <div class="features-list">
                     ${unit.features.map(feature => `
                         <div class="feature-item">
@@ -157,8 +168,8 @@ function displayUnit(unit, project) {
                         </div>
                     `).join('')}
                 </div>
-                ` : ''}
             </div>
+            ` : ''}
 
             <!-- Specifications -->
             <div class="unit-specs">

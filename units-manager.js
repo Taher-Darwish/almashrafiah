@@ -169,6 +169,16 @@ function openUnitModal(unitIndex = null) {
                         <textarea id="unit_description_en" required rows="3"></textarea>
                     </div>
 
+                    <div class="form-group">
+                        <label>ضمانات الوحدة (عربي)</label>
+                        <textarea id="unit_warranty_ar" rows="3" placeholder="مثال: ضمان التشطيبات، ضمان العزل، ضمان التكييف"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit Warranties (English)</label>
+                        <textarea id="unit_warranty_en" rows="3" placeholder="Example: Finishing warranty, insulation guarantee, AC warranty"></textarea>
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label>المساحة (م²)</label>
@@ -543,6 +553,8 @@ function setupUnitModal(unitIndex) {
         document.getElementById('unit_name_en').value = unit.name_en || '';
         document.getElementById('unit_description_ar').value = unit.description_ar || '';
         document.getElementById('unit_description_en').value = unit.description_en || '';
+        document.getElementById('unit_warranty_ar').value = unit.warranty_ar || '';
+        document.getElementById('unit_warranty_en').value = unit.warranty_en || '';
         document.getElementById('unit_area').value = unit.area || '';
         document.getElementById('unit_price').value = unit.price || '';
         document.getElementById('unit_bedrooms').value = unit.bedrooms || '';
@@ -624,6 +636,8 @@ async function saveUnit() {
             name_en: document.getElementById('unit_name_en').value.trim(),
             description_ar: document.getElementById('unit_description_ar').value.trim(),
             description_en: document.getElementById('unit_description_en').value.trim(),
+            warranty_ar: document.getElementById('unit_warranty_ar').value.trim(),
+            warranty_en: document.getElementById('unit_warranty_en').value.trim(),
             area: document.getElementById('unit_area').value.trim(),
             price: document.getElementById('unit_price').value.trim(),
             bedrooms: parseInt(document.getElementById('unit_bedrooms').value) || null,
