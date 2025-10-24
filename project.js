@@ -34,7 +34,23 @@ const translations = {
         'spec.price': 'السعر',
         'spec.units': 'عدد الوحدات',
         'spec.deliveryDate': 'تاريخ التسليم',
-        'spec.status': 'الحالة'
+        'spec.status': 'الحالة',
+        'footer.description': 'شركة رائدة في مجال التطوير العقاري والاستثمار في المملكة العربية السعودية',
+        'footer.quickLinks.title': 'روابط سريعة',
+        'footer.services.title': 'الخدمات',
+        'footer.contact.title': 'معلومات التواصل',
+        'footer.contact.address': 'المملكة العربية السعودية، الرياض، الحمراء',
+        'footer.contact.cr': 'السجل التجاري: 7032981883',
+        'footer.copyright': '© 2024 شركة المشرفية للتطوير والاستثمار العقاري. جميع الحقوق محفوظة.',
+        'contact.address.map': 'الموقع على خرائط جوجل',
+        'partners.title': 'شركاؤنا',
+        'services.item1': 'الاستثمار الفردي',
+        'services.item2': 'الشراكة الاستثمارية',
+        'services.item3': 'التطوير العقاري',
+        'services.item4': 'الاستشارات العقارية',
+        'services.item5': 'البيع على الخارطة',
+        'services.item6': 'تأجير الوحدات الجاهزة',
+        'services.item7': 'بيع الوحدات الجاهزة'
     },
     en: {
         'brand.name': 'Al-Mashrafiah',
@@ -62,7 +78,23 @@ const translations = {
         'spec.price': 'Price',
         'spec.units': 'Units',
         'spec.deliveryDate': 'Delivery Date',
-        'spec.status': 'Status'
+        'spec.status': 'Status',
+        'footer.description': 'A leading real estate development and investment company in Saudi Arabia',
+        'footer.quickLinks.title': 'Quick Links',
+        'footer.services.title': 'Services',
+        'footer.contact.title': 'Contact Info',
+        'footer.contact.address': 'Saudi Arabia, Riyadh, Al-Hamra',
+        'footer.contact.cr': 'CR: 7032981883',
+        'footer.copyright': '© 2024 Al-Mashrafiah Real Estate Development. All rights reserved.',
+        'contact.address.map': 'Open on Google Maps',
+        'partners.title': 'Our Partners',
+        'services.item1': 'Individual Investment',
+        'services.item2': 'Investment Partnership',
+        'services.item3': 'Real Estate Development',
+        'services.item4': 'Real Estate Consulting',
+        'services.item5': 'Off-plan Sales',
+        'services.item6': 'Leasing Ready Units',
+        'services.item7': 'Selling Ready Units'
     }
 };
 
